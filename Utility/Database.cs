@@ -6,8 +6,14 @@ namespace Utility
     {
         private readonly SqlConnection _conn;
 
+        // Use this if you want to use the Config.txt connection string
+        public Database(string connectionString)
+        {
+            _conn = new SqlConnection(connectionString);
+        }
+
         // Use this when on a Windows system!
-        public Database(string dbName, string dbServer = "DESKTOP-9GDQRUC")
+        public Database(string dbName, string dbServer)
         {
             string connectionString =
                 $"Data Source={dbServer};" +
