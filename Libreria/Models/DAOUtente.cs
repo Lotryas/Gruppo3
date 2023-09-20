@@ -10,12 +10,7 @@ public class DAOUtente
 
     private DAOUtente()
     {
-        _db = new Database(
-            dbName: "login_example",
-            dbServer: "localhost,1433",
-            dbUser: "sa",
-            dbPassword: "SQLServerDevPassword!"
-        );
+        _db = new Database(Config.ConnectionString.Value);
     }
 
     public static DAOUtente GetInstance()
@@ -25,14 +20,14 @@ public class DAOUtente
 
     public bool Delete(long id)
     {
-        SqlCommand cmd = new("DELETE FROM users WHERE id = @id;");
+        SqlCommand cmd = new("DELETE FROM Utenti WHERE id = @id;");
         cmd.Parameters.AddWithValue("@id", id);
         return _db.ExecQuery(cmd);
     }
 
     public Entity? Find(long id)
     {
-        SqlCommand cmd = new("SELECT TOP 1 * FROM users WHERE id = @id;");
+        SqlCommand cmd = new("SELECT TOP 1 * FROM Utenti WHERE id = @id;");
         cmd.Parameters.AddWithValue("@id", id);
 
         Dictionary<string, object>? record = _db.ReadOne(cmd);
@@ -44,10 +39,10 @@ public class DAOUtente
         return utente;
     }
 
-    public Entity? Find(string username)
+    public Entity? Find(string nome)
     {
-        SqlCommand cmd = new("SELECT TOP 1 * FROM users WHERE username = @username;");
-        cmd.Parameters.AddWithValue("@username", username);
+        SqlCommand cmd = new("SELECT TOP 1 * FROM Utenti WHERE nome = @nome;");
+        cmd.Parameters.AddWithValue("@nome", nome);
 
         Dictionary<string, object>? record = _db.ReadOne(cmd);
         if (record is null) return null;
@@ -75,35 +70,35 @@ public class DAOUtente
 
     public List<Entity> ReadAll()
     {
-        SqlCommand cmd = new("SELECT username FROM users ORDER BY id DESC;");
+        SqlCommand cmd = new("SELECT nome FROM Utenti ORDER BY id DESC;");
         List<Dictionary<string, object>> records = _db.ReadMany(cmd);
 
-        List<Entity> users = new();
+        List<Entity> utenti = new();
         foreach (Dictionary<string, object> record in records)
         {
-            User user = new();
-            user.PopulateFromRecord(record);
-            users.Add(user);
+            Utente utente = new();
+            utente.PopulateFromRecord(record);
+            utenti.Add(utente);
         }
 
-        return users;
+        return utenti;
     }
 
     public bool Update(Entity entity)
     {
-        User user = (User)entity;
+        Utente utente = (Utente)entity;
 
         SqlCommand cmd = new(@"
-                UPDATE users SET
-                    username = @username,
-                    password_hash = HASHBYTES('SHA2_512', @password_hash),
-                    permission_level = @permission_level
+                UPDATE Utenti SET
+                    nome = @nome,
+                    pass = HASHBYTES('SHA2_512', @pass),
+                    ruolo = @ruolo
                 WHERE id = @id;
             ");
-        cmd.Parameters.AddWithValue("@username", user.Username);
-        cmd.Parameters.AddWithValue("@password_hash", user.PasswordHash);
-        cmd.Parameters.AddWithValue("@permission_level", user.PermissionLevel);
-        cmd.Parameters.AddWithValue("@id", user.Id);
+        cmd.Parameters.AddWithValue("@nome", utente.Nome);
+        cmd.Parameters.AddWithValue("@pass", utente.Pass);
+        cmd.Parameters.AddWithValue("@ruolo", utente.Ruolo);
+        cmd.Parameters.AddWithValue("@id", utente.Id);
 
         return _db.ExecQuery(cmd);
     }
