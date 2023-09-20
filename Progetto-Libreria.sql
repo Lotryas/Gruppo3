@@ -36,9 +36,9 @@ ON DELETE SET NULL,
 
 INSERT INTO Utenti (nome, pass, ruolo)
 VALUES
-    ('Alice', HASHBYTES('Sha2_512','hashed_password_1'), 'Lettore'),
-    ('Bob',HASHBYTES('Sha2_512', 'hashed_password_2'), 'Amministratore'),
-    ('Charlie', HASHBYTES('Sha2_512','hashed_password_3'), 'Lettore');
+    ('Alice', HASHBYTES('Sha2_512', N'hashed_password_1'), 'Lettore'),
+    ('Bob',HASHBYTES('Sha2_512', N'hashed_password_2'), 'Amministratore'),
+    ('Charlie', HASHBYTES('Sha2_512', N'hashed_password_3'), 'Lettore');
 
 
 
