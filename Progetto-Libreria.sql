@@ -25,8 +25,8 @@ idUtente INT,
 FOREIGN KEY (idUtente) REFERENCES Utenti(id)
 ON UPDATE SET NULL
 ON DELETE SET NULL,
-idLibri INT,
-FOREIGN KEY (idLibri) REFERENCES Libri(id)
+idLibro INT,
+FOREIGN KEY (idLibro) REFERENCES Libri(id)
 ON UPDATE SET NULL
 ON DELETE SET NULL,
 
@@ -48,7 +48,7 @@ VALUES
     ('1984', 'George Orwell', 'Distopia', 5, 1, '1984.epub'),
     ('Harry Potter e la Pietra Filosofale', 'J.K. Rowling', 'Fantasy', 7, 0, 'harry_potter.pdf');
 
-INSERT INTO Utenti_Libri (idUtente, idLibri)
+INSERT INTO Utenti_Libri (idUtente, idLibro)
 VALUES
     (1, 1),
     (1, 2),
