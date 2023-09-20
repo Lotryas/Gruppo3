@@ -1,0 +1,66 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/lotryas/code/doita10/Gruppo3/Utility/Utility.csproj": {}
+  },
+  "projects": {
+    "/home/lotryas/code/doita10/Gruppo3/Utility/Utility.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/lotryas/code/doita10/Gruppo3/Utility/Utility.csproj",
+        "projectName": "Utility",
+        "projectPath": "/home/lotryas/code/doita10/Gruppo3/Utility/Utility.csproj",
+        "packagesPath": "/home/lotryas/.nuget/packages/",
+        "outputPath": "/home/lotryas/code/doita10/Gruppo3/Utility/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/lotryas/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.121/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
