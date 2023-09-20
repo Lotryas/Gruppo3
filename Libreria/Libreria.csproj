@@ -11,9 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Utility">
-      <HintPath>../Utility/bin/Debug/net6.0/Utility.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\Utility\Utility.csproj" />
   </ItemGroup>
-
 </Project>
