@@ -1,7 +1,5 @@
 string[] lines = File.ReadAllLines("./Config/Config.txt");
-string line = lines[0];
-Console.WriteLine(line);
-
+Config.ConnectionString.SetConnectionString(lines[0]);
 
 var builder = WebApplication.CreateBuilder(args);
 
