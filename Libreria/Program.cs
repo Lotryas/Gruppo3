@@ -1,3 +1,8 @@
+string[] lines = File.ReadAllLines("./Config/Config.txt");
+string line = lines[0];
+Console.WriteLine(line);
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
