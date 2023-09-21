@@ -19,7 +19,9 @@ namespace Libreria.Models
         }
         public bool Delete(long id)
         {
-            throw new NotImplementedException();
+            SqlCommand cmd = new("DELETE FROM Utenti_Libri WHERE id = @id;");
+            cmd.Parameters.AddWithValue("@id", id);
+            return _db.ExecQuery(cmd);
         }
 
         public Entity? Find(long id)
