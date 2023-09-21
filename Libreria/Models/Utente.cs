@@ -14,4 +14,11 @@ public class Utente : Entity
         Pass = "";
         Ruolo = "";
     }
+
+    public Utente(int id,string nome, string pass, string ruolo): base (id)
+    {
+        Nome = nome;
+        Pass = pass;
+        Ruolo = ruolo;
+    }
 }
