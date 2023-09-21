@@ -70,7 +70,7 @@ public class DAOUtente
 
     public List<Entity> ReadAll()
     {
-        SqlCommand cmd = new("SELECT nome FROM Utenti ORDER BY id DESC;");
+        SqlCommand cmd = new("SELECT * FROM Utenti ORDER BY id DESC;");
         List<Dictionary<string, object>> records = _db.ReadMany(cmd);
 
         List<Entity> utenti = new();
@@ -103,15 +103,15 @@ public class DAOUtente
         return _db.ExecQuery(cmd);
     }
 
-    public bool Validate(string username, string password)
+    public bool Validate(string nome, string pass)
     {
         SqlCommand cmd = new(@$"
-                SELECT TOP 1 * FROM users
-                WHERE username = @username
-                AND password_hash = HASHBYTES('SHA2_512', @password_hash);
+                SELECT TOP 1 * FROM Utenti
+                WHERE nome = @nome
+                AND pass = HASHBYTES('SHA2_512', @pass);
             ");
-        cmd.Parameters.AddWithValue("@username", username);
-        cmd.Parameters.AddWithValue("@password_hash", password);
+        cmd.Parameters.AddWithValue("@nome", nome);
+        cmd.Parameters.AddWithValue("@pass", pass);
 
         Dictionary<string, object>? record = _db.ReadOne(cmd);
         if (record is null) return false;
