@@ -23,8 +23,7 @@ function controlli_registrazione()
     let p1 = document.getElementById('password1').value;
     let p2 = document.getElementById('password2').value;
 
-    console.log(p1, p2);
-        return false;
+  
 
     if (p1 != p2) {
         alert("LE PASSWORD NON CORRISPONDONO");
