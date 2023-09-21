@@ -9,7 +9,7 @@ namespace Libreria.Controllers
     {
         private ILogger<LoginController> ilogger;
         private static Utente? utenteLoggato = null;
-        private static int chiamata = -1;
+       
 
         public LoginController(ILogger<LoginController> logger) 
         { 
@@ -18,9 +18,8 @@ namespace Libreria.Controllers
 
         public IActionResult Index()
         {
-            chiamata++;
-            ilogger.LogInformation($"TENTATIVO NUMERO:{chiamata}");
-            return View(chiamata);
+      
+            return View();
         }
 
         public IActionResult Valida(Dictionary<string, string> keyValuePairs)
@@ -29,8 +28,8 @@ namespace Libreria.Controllers
             if (DAOUtente.GetInstance().Validate(keyValuePairs["nome"], keyValuePairs["pass"]))
             {
 
-                ilogger.LogInformation($"UTENTE LOGGATO: {keyValuePairs["user"]}");             
-                utenteLoggato = (Utente?)DAOUtente.GetInstance().Find(keyValuePairs["user"]);    
+                ilogger.LogInformation($"UTENTE LOGGATO: {keyValuePairs["nome"]}");             
+                utenteLoggato = (Utente?)DAOUtente.GetInstance().Find(keyValuePairs["nome"]);    
                 return View("Views/Login/Profilo.cshtml", utenteLoggato);                         
             }
             else
@@ -43,7 +42,7 @@ namespace Libreria.Controllers
         public IActionResult Logout()
         {
             
-            chiamata = -1;
+         
 
             ilogger.LogInformation($"LOGOUT: {utenteLoggato.Nome}");
 
@@ -58,11 +57,13 @@ namespace Libreria.Controllers
             return View();
         }
 
-        public IActionResult Salva(Dictionary<string, object> keyValuePairs)
+        public IActionResult Salva()
         {
+            
             Utente utente = new Utente();
-            utente.PopulateFromRecord(keyValuePairs);
-            chiamata--;
+            utente.Nome = Request.Form["nome"];
+            utente.Pass = Request.Form["pass"];
+            
 
             if (DAOUtente.GetInstance().Insert(utente))
             {

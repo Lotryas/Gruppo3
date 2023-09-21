@@ -1,11 +1,11 @@
 ﻿function controlla_login()
 {
-    if (document.getElementById('user').value.length < 2) {
-        alert("IL NOME UTENTE " + document.getElementById('user').value + " CHE HAI INSERITO E' TROPPO BREVE");
+    if (document.getElementById('nome').value.length < 2) {
+        alert("IL NOME UTENTE " + document.getElementById('nome').value + " CHE HAI INSERITO E' TROPPO BREVE");
         return false;
     }
 
-    if (document.getElementById('password_').value.length < 8) {
+    if (document.getElementById('pass').value.length < 8) {
         alert(" LA PASSWORD ISERITA E' TROPPO BREVE");
         return false;
     }
@@ -15,13 +15,16 @@
 function controlli_registrazione()
 {
     
-    if (document.getElementById('user').value.length < 2) {
-        alert("IL NOME UTENTE " + document.getElementById('user').value + " CHE HAI INSERITO E' TROPPO BREVE");
+    if (document.getElementById('nome').value.length < 2) {
+        alert("IL NOME UTENTE " + document.getElementById('nome').value + " CHE HAI INSERITO E' TROPPO BREVE");
         return false;
     }
 
     let p1 = document.getElementById('password1').value;
     let p2 = document.getElementById('password2').value;
+
+    console.log(p1, p2);
+        return false;
 
     if (p1 != p2) {
         alert("LE PASSWORD NON CORRISPONDONO");

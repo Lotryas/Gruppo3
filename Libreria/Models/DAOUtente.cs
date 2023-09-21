@@ -63,7 +63,7 @@ public class DAOUtente
             ");
         cmd.Parameters.AddWithValue("@nome", utente.Nome);
         cmd.Parameters.AddWithValue("@pass", utente.Pass);
-        cmd.Parameters.AddWithValue("@ruolo", utente.Ruolo);
+        cmd.Parameters.AddWithValue("@ruolo", "Dipendente");
 
         return _db.ExecQuery(cmd);
     }
