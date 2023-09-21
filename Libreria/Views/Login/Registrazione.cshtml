@@ -1,0 +1,59 @@
+﻿@model Libreria.Models.Utente
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Registrazione</title>
+    <link rel="stylesheet" type="text/css" href="/css/Login/StileRegistrazione.css" />
+    <script src="~/js/Login/ControlliLogin.js"></script>
+</head>
+<body>
+    <div class="titolo">
+        <h1>CREA IL TUO NUOVO PROFILO</h1>
+    </div>
+
+    <div class="dati">
+        <form action="/Login/Salva" onsubmit="return controlli_registrazione()" method="post">
+            <table>
+                <tr colspan="2">
+                    INSERISCI DATI
+                </tr>
+                <tr>
+                    <td>
+                        NOME
+                    </td>
+                    <td>
+                        <input type="text" name="nome" id="user" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        PASSWORD
+                    </td>
+                    <td>
+                        <input type="password" name="pass" id="password1" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        REINSERISCI PASSWORD
+                    </td>
+                    <td>
+                        <input type="password" id="password2" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        RUOLO
+                    </td>
+                    <td>
+                        <input type="text" id="ruolo" name="ruolo" placeholder="Amministratore o Lettore" />
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="REGISTRATI" id="bottone" />
+        </form>
+    </div>
+</body>
+</html>

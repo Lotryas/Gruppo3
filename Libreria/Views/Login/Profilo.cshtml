@@ -1,0 +1,23 @@
+﻿@model Libreria.Models.Utente
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>MyAccount</title>
+    <link rel="stylesheet" type="text/css" href="/css/Login/StileProfilo.css" />
+</head>
+<body>
+    <div>
+        <h1>
+            Profilo di @Model.Nome
+        </h1>
+        <h4>Codice Utente: @Model.Id</h4>
+        <p>
+           Hai effettuato l'accesso come: @Model.Ruolo
+        </p>
+    </div>
+    <a href="/Login/Logout">LOGOUT</a>
+
+</body>
+</html>
