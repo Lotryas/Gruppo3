@@ -110,7 +110,7 @@ namespace Libreria.Models
         public List<Entity> FindTitolo(string titolo)
         {
             List<Entity> ris = new();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Libri WHERE titolo = @titolo");
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Libri WHERE titolo LIKE '%' + @titolo + '%';");
             cmd.Parameters.AddWithValue("@titolo", titolo);
             List<Dictionary<string, object>> tabella = _db.ReadMany(cmd);
             if (tabella is null)
