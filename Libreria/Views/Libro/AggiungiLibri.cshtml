@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Aggiungi Libro</title>
+    <script src="~/js/Libro/ControlloLibro.js"></script>
+</head>
+<body>
+    <div class="titolo">
+        <h1>AGGIUNGI UN LIBRO</h1>
+    </div> 
+
+    <div class="dati">
+        <form action="/Libro/Aggiungi" onsubmit="return controllaDati()">
+            <table>
+                <tr>
+                    <td>
+                        TITOLO
+                    </td>
+                    <td>
+                        <input type="text" name="titolo" id="titolo"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        AUTORE
+                    </td>
+                    <td>
+                        <input type="text" name="autore" id="autore" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        GENERE
+                    </td>
+                    <td>
+                        <input type="text" name="genere" id="genere" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        QUANTITA'
+                    </td>
+                    <td>
+                        <input type="number" name="quantita" id="quantita" />
+                    </td>
+                </tr>
+                <tr colspan="3">
+                    <td>
+                        DIGITALE
+                    </td>
+                    <td>
+                        <input type="radio" id="digitale_si" name="formato" value="true" checked />
+                        <label for="digitale_si">Si</label>
+                    </td>
+                    <td>
+                        <input type="radio" id="digitale_no" name="formato" value="false" />
+                        <label for="digitale_no">No</label>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td>
+                        NOME FILE
+                    </td>
+                    <td>
+                        <input type="text" name="nomefile" id="nomefile" />
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="SALVA" id="bottone" />
+        </form>
+    </div>
+</body>
+</html>
