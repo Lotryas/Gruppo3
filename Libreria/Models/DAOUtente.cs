@@ -58,9 +58,9 @@ public class DAOUtente
         Utente utente = (Utente)entity;
 
         SqlCommand cmd = new(@"
-                INSERT INTO Utenti (nome, email, pass, ruolo)
-                VALUES (@nome, @email, HASHBYTES('SHA2_512', @pass), @ruolo); 
-            ");
+            INSERT INTO Utenti (nome, email, pass, ruolo)
+            VALUES (@nome, @email, HASHBYTES('SHA2_512', @pass), @ruolo); 
+        ");
         cmd.Parameters.AddWithValue("@nome", utente.Nome);
         cmd.Parameters.AddWithValue("@email", utente.Email);
         cmd.Parameters.AddWithValue("@pass", utente.Pass);
@@ -90,13 +90,13 @@ public class DAOUtente
         Utente utente = (Utente)entity;
 
         SqlCommand cmd = new(@"
-                UPDATE Utenti SET
-                    nome = @nome,
-                    email = @email,
-                    pass = HASHBYTES('SHA2_512', @pass),
-                    ruolo = @ruolo
-                WHERE id = @id;
-            ");
+            UPDATE Utenti SET
+                nome = @nome,
+                email = @email,
+                pass = HASHBYTES('SHA2_512', @pass),
+                ruolo = @ruolo
+            WHERE id = @id;
+        ");
         cmd.Parameters.AddWithValue("@nome", utente.Nome);
         cmd.Parameters.AddWithValue("@email", utente.Email);
         cmd.Parameters.AddWithValue("@pass", utente.Pass);
@@ -108,11 +108,11 @@ public class DAOUtente
 
     public bool Validate(string email, string pass)
     {
-        SqlCommand cmd = new(@$"
-                SELECT TOP 1 * FROM Utenti
-                WHERE email = @email
-                AND pass = HASHBYTES('SHA2_512', @pass);
-            ");
+        SqlCommand cmd = new(@"
+            SELECT TOP 1 * FROM Utenti
+            WHERE email = @email
+            AND pass = HASHBYTES('SHA2_512', @pass);
+        ");
         cmd.Parameters.AddWithValue("@email", email);
         cmd.Parameters.AddWithValue("@pass", pass);
 
