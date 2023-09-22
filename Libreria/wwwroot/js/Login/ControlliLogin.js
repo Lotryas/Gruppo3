@@ -1,7 +1,7 @@
 ﻿function controlla_login()
 {
-    if (document.getElementById('nome').value.length < 2) {
-        alert("IL NOME UTENTE " + document.getElementById('nome').value + " CHE HAI INSERITO E' TROPPO BREVE");
+    if (document.getElementById('email').value.length < 2) {
+        alert("L' EMAIL " + document.getElementById('email').value + " CHE HAI INSERITO E' TROPPO BREVE");
         return false;
     }
 
@@ -19,6 +19,12 @@ function controlli_registrazione()
         alert("IL NOME UTENTE " + document.getElementById('nome').value + " CHE HAI INSERITO E' TROPPO BREVE");
         return false;
     }
+
+    if (document.getElementById('email').value.length < 3) {
+        alert("L'EMAIL " + document.getElementById('email').value + " CHE HAI INSERITO E' TROPPO BREVE");
+        return false;
+    }
+
 
     let p1 = document.getElementById('password1').value;
     let p2 = document.getElementById('password2').value;
@@ -49,6 +55,8 @@ function controlli_registrazione()
         alert(error.join("\n"));
         return false;
     }
+
+
 
     return true;
 

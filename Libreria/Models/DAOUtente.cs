@@ -39,10 +39,10 @@ public class DAOUtente
         return utente;
     }
 
-    public Entity? Find(string nome)
+    public Entity? Find(string email)
     {
-        SqlCommand cmd = new("SELECT TOP 1 * FROM Utenti WHERE nome = @nome;");
-        cmd.Parameters.AddWithValue("@nome", nome);
+        SqlCommand cmd = new("SELECT TOP 1 * FROM Utenti WHERE email = @email;");
+        cmd.Parameters.AddWithValue("@email", email);
 
         Dictionary<string, object>? record = _db.ReadOne(cmd);
         if (record is null) return null;
@@ -58,10 +58,11 @@ public class DAOUtente
         Utente utente = (Utente)entity;
 
         SqlCommand cmd = new(@"
-                INSERT INTO Utenti (nome, pass, ruolo)
-                VALUES (@nome, HASHBYTES('SHA2_512', @pass), @ruolo); 
+                INSERT INTO Utenti (nome, email, pass, ruolo)
+                VALUES (@nome, @email, HASHBYTES('SHA2_512', @pass), @ruolo); 
             ");
         cmd.Parameters.AddWithValue("@nome", utente.Nome);
+        cmd.Parameters.AddWithValue("@email", utente.Email);
         cmd.Parameters.AddWithValue("@pass", utente.Pass);
         cmd.Parameters.AddWithValue("@ruolo", "Dipendente");
 
@@ -91,11 +92,13 @@ public class DAOUtente
         SqlCommand cmd = new(@"
                 UPDATE Utenti SET
                     nome = @nome,
+                    email = @email,
                     pass = HASHBYTES('SHA2_512', @pass),
                     ruolo = @ruolo
                 WHERE id = @id;
             ");
         cmd.Parameters.AddWithValue("@nome", utente.Nome);
+        cmd.Parameters.AddWithValue("@email", utente.Email);
         cmd.Parameters.AddWithValue("@pass", utente.Pass);
         cmd.Parameters.AddWithValue("@ruolo", utente.Ruolo);
         cmd.Parameters.AddWithValue("@id", utente.Id);
@@ -103,14 +106,14 @@ public class DAOUtente
         return _db.ExecQuery(cmd);
     }
 
-    public bool Validate(string nome, string pass)
+    public bool Validate(string email, string pass)
     {
         SqlCommand cmd = new(@$"
                 SELECT TOP 1 * FROM Utenti
-                WHERE nome = @nome
+                WHERE email = @email
                 AND pass = HASHBYTES('SHA2_512', @pass);
             ");
-        cmd.Parameters.AddWithValue("@nome", nome);
+        cmd.Parameters.AddWithValue("@email", email);
         cmd.Parameters.AddWithValue("@pass", pass);
 
         Dictionary<string, object>? record = _db.ReadOne(cmd);

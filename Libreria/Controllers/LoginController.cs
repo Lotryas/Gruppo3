@@ -22,14 +22,16 @@ namespace Libreria.Controllers
             return View();
         }
 
-        public IActionResult Valida(Dictionary<string, string> keyValuePairs)
+        public IActionResult Valida()
         {
-           
-            if (DAOUtente.GetInstance().Validate(keyValuePairs["nome"], keyValuePairs["pass"]))
+            var email = Request.Form["email"];
+            var password = Request.Form["password"];
+
+            if (DAOUtente.GetInstance().Validate(email, password))
             {
 
-                ilogger.LogInformation($"UTENTE LOGGATO: {keyValuePairs["nome"]}");             
-                utenteLoggato = (Utente?)DAOUtente.GetInstance().Find(keyValuePairs["nome"]);    
+                ilogger.LogInformation($"UTENTE LOGGATO: {email}");             
+                utenteLoggato = (Utente?)DAOUtente.GetInstance().Find(email);    
                 return View("Views/Login/Profilo.cshtml", utenteLoggato);                         
             }
             else
@@ -44,7 +46,7 @@ namespace Libreria.Controllers
             
          
 
-            ilogger.LogInformation($"LOGOUT: {utenteLoggato.Nome}");
+            ilogger.LogInformation($"LOGOUT: {utenteLoggato?.Email}");
 
             utenteLoggato = null;
 
@@ -62,6 +64,7 @@ namespace Libreria.Controllers
             
             Utente utente = new Utente();
             utente.Nome = Request.Form["nome"];
+            utente.Email = Request.Form["email"];
             utente.Pass = Request.Form["pass"];
             
 
