@@ -1,59 +1,27 @@
-﻿
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Accedi</title>
-    <link rel="stylesheet" type="text/css" href="/css/Login/StileAccesso.css" />
+﻿@section Scripts
+    {
     <script src="~/js/Login/ControlliLogin.js"></script>
-</head>
-<body>
+}
 
-    <h3>Accedi al tuo account</h3>
-
-    <div class="accedi">
-       
-        <form action="/Login/Valida" onsubmit="return controlla_login()" method="post">
-            
-            <table>
-                <tr colspan="2">
-                    LOGIN
-                </tr>
-                <tr>
-                    <td>
-                        USERNAME
-                    </td>
-                    <td>
-                        <input type="text" id="nome" name="nome" placeholder="inserisci il nome" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        PASSWORD
-                    </td>
-                    <td>
-                        <input type="password" id="pass" name="pass" placeholder="inserisci la password" />
-                    </td>
-                </tr>
-
-
-            </table>
-            <input type="submit" value="ACCEDI" id="accediBottone" />
-
-            <div class="registrazioneLink">
-                <p>
-                    Non hai ancora l'account?
-                    Registrati <a href="/Login/Registrazione">QUI</a> 
-                </p>
+<section class="auth-container">
+    <div class="auth-card">
+        <h1 class="auth-title">Accedi al tuo account</h1>
+        <form action="/Login/Valida" onsubmit="return controlla_login()" method="POST">
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome" placeholder="Inserisci il nome" />
             </div>
-
-            <div class="recuperoPasswordLink">
-                <p>
-                    Hai dimenticato username o password?
-                    Clicca <a href="/Login/RecuperoCredenziali">QUI</a>
-                </p>
+            <div class="form-group">
+                <label for="pass">Password</label>
+                <input type="password" id="pass" name="pass" placeholder="Inserisci la password" />
+            </div>
+            <div class="form-buttons justify-end">
+                <button type="submit" class="btn-primary">Accedi</button>
+            </div>
+            <div class="form-links">
+                <a href="/Login/Registrazione">Non hai un account? Registrati</a>
+                <a href="/Login/Registrazione">Non ricordi la password? Recupera le credenziali</a>
             </div>
         </form>
     </div>
-</body>
-</html>
+</section>
