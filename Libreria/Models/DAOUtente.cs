@@ -3,7 +3,7 @@ using Utility;
 
 namespace Libreria.Models;
 
-public class DAOUtente
+public class DAOUtente : IDAO
 {
     private readonly Database _db;
     private static DAOUtente? _instance;

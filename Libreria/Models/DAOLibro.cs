@@ -1,129 +1,121 @@
 ﻿using System.Data.SqlClient;
 using Utility;
 
-namespace Libreria.Models
+namespace Libreria.Models;
+
+public class DAOLibro : IDAO
 {
-    public class DAOLibro : IDAO
+    private readonly Database _db;
+    private static DAOLibro? _instance;
+
+    private DAOLibro()
     {
-        private static Database? _db;
-        private static DAOLibro? _instance = null;
+        _db = new(Config.ConnectionString.Value);
+    }
 
-        public static DAOLibro GetInstance()
-        {
-            return _instance ??= new DAOLibro();
-        }
+    public static DAOLibro GetInstance()
+    {
+        return _instance ??= new DAOLibro();
+    }
 
-        private DAOLibro()
-        {
-            _db = new(Config.ConnectionString.Value);
-        }
+    private List<Entity> ReadMany(SqlCommand cmd)
+    {
+        List<Dictionary<string, object>> tabella = _db.ReadMany(cmd);
 
-        public bool Delete(long id)
+        List<Entity> libri = new();
+        foreach (Dictionary<string, object> riga in tabella)
         {
-            SqlCommand cmd = new SqlCommand("DELETE FROM Libri WHERE id = @id;");
-            cmd.Parameters.AddWithValue("@id",id);
-            return _db.ExecQuery(cmd);
-        }
-
-        public Entity? Find(long id)
-        {
-            SqlCommand cmd = new SqlCommand("SELECT TOP 1 * FROM Libri WHERE id = @id;");
-            cmd.Parameters.AddWithValue("@id", id);
-            Dictionary<string, object>? record = _db.ReadOne(cmd);
-            if (record is null)
-                return null;
             Libro l = new();
-            l.PopulateFromRecord(record);
-            // Per qualche motivo senza questa linea il nome del file non viene salvato nell'oggetto
-            l.NomeFile = (string)record["nomeFile"];
-            return l;
-            
+            l.PopulateFromRecord(riga);
+            libri.Add(l);
         }
 
-        public bool Insert(Entity entity)
-        {
-            Libro l = (Libro)entity;
-            SqlCommand cmd = new SqlCommand("INSERT INTO Libri\n" +
-                "(titolo, autore, genere, quantita, formato, nomeFile)\n" +
-                "VALUES\n" +
-                @"(@titolo, @autore, @genere, @quantita, @formato, @nomeFile)");
-            cmd.Parameters.AddWithValue("@titolo", l.Titolo);
-            cmd.Parameters.AddWithValue("@autore", l.Autore);
-            cmd.Parameters.AddWithValue("@genere", l.Genere);
-            cmd.Parameters.AddWithValue("@quantita", l.Quantita);
-            cmd.Parameters.AddWithValue("@formato", l.Formato);
-            cmd.Parameters.AddWithValue("@nomeFile", l.NomeFile);
-            return _db.ExecQuery(cmd);
-        }
+        return libri;
+    }
 
-        public List<Entity> ReadAll()
-        {
-            List<Entity> ris = new();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Libri;");
-            List<Dictionary<string, object>> tabella = _db.ReadMany(cmd);
-            foreach (Dictionary<string,object> riga in tabella)
-            {
-                Libro l = new();
-                l.PopulateFromRecord(riga);
-                ris.Add(l);
-            }
-            return ris;
-        }
+    public bool Delete(long id)
+    {
+        SqlCommand cmd = new("DELETE FROM Libri WHERE id = @id;");
+        cmd.Parameters.AddWithValue("@id", id);
+        return _db.ExecQuery(cmd);
+    }
 
-        public bool Update(Entity entity)
-        {
-            Libro l = (Libro)entity;
-            SqlCommand cmd = new SqlCommand("UPDATE Libri\n" +
-                "SET\n" +
-                "titolo = @titolo,\n" +
-                "autore = @autore,\n" +
-                "genere = @genere,\n" +
-                "quantita = @quantita,\n" +
-                "formato = @formato,\n" +
-                "nomeFile = @nomeFile\n" +
-                "WHERE id = @id;");
-            cmd.Parameters.AddWithValue("@id", l.Id);
-            cmd.Parameters.AddWithValue("@titolo", l.Titolo);
-            cmd.Parameters.AddWithValue("@autore", l.Autore);
-            cmd.Parameters.AddWithValue("@genere", l.Genere);
-            cmd.Parameters.AddWithValue("@quantita", l.Quantita);
-            cmd.Parameters.AddWithValue("@formato", l.Formato);
-            cmd.Parameters.AddWithValue("@nomeFile", l.NomeFile);
-            return _db.ExecQuery(cmd);
-        }
+    public Entity? Find(long id)
+    {
+        SqlCommand cmd = new("SELECT TOP 1 * FROM Libri WHERE id = @id;");
+        cmd.Parameters.AddWithValue("@id", id);
 
-        public List<Entity> FindAutore(string autore)
-        {
-            List<Entity> ris = new();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Libri WHERE autore = @autore");
-            cmd.Parameters.AddWithValue("@autore", autore);
-            List<Dictionary<string, object>> tabella = _db.ReadMany(cmd);
-            if (tabella is null)
-                return null;
-            foreach (Dictionary<string, object> riga in tabella)
-            {
-                Libro l = new();
-                l.PopulateFromRecord(riga);
-                ris.Add(l);
-            }
-            return ris;
-        }
+        Dictionary<string, object>? record = _db.ReadOne(cmd);
+        if (record is null) return null;
 
-        public List<Entity> FindTitolo(string titolo)
-        {
-            List<Entity> ris = new();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Libri WHERE titolo LIKE '%' + @titolo + '%';");
-            cmd.Parameters.AddWithValue("@titolo", titolo);
-            List<Dictionary<string, object>> tabella = _db.ReadMany(cmd);
-            if (tabella is null)
-                return null;
-            foreach (Dictionary<string, object> riga in tabella)
-            {
-                Libro l = new();
-                l.PopulateFromRecord(riga);
-                ris.Add(l);
-            }
-            return ris;
-        }
+        Libro l = new();
+        l.PopulateFromRecord(record);
+        // Per qualche motivo senza questa linea il nome del file non viene salvato nell'oggetto
+        l.NomeFile = (string)record["nomeFile"];
+
+        return l;
+    }
+
+    public bool Insert(Entity entity)
+    {
+        Libro l = (Libro)entity;
+
+        SqlCommand cmd = new(@"
+            INSERT INTO Libri (titolo, autore, genere, quantita, formato, nomeFile)
+            VALUES (@titolo, @autore, @genere, @quantita, @formato, @nomeFile);
+        ");
+        cmd.Parameters.AddWithValue("@titolo", l.Titolo);
+        cmd.Parameters.AddWithValue("@autore", l.Autore);
+        cmd.Parameters.AddWithValue("@genere", l.Genere);
+        cmd.Parameters.AddWithValue("@quantita", l.Quantita);
+        cmd.Parameters.AddWithValue("@formato", l.Formato);
+        cmd.Parameters.AddWithValue("@nomeFile", l.NomeFile);
+
+        return _db.ExecQuery(cmd);
+    }
+
+    public List<Entity> ReadAll()
+    {
+        SqlCommand cmd = new("SELECT * FROM Libri;");
+        return this.ReadMany(cmd);
+    }
+
+    public bool Update(Entity entity)
+    {
+        Libro l = (Libro)entity;
+
+        SqlCommand cmd = new(@"
+            UPDATE Libri SET
+                titolo = @titolo,
+                autore = @autore,
+                genere = @genere,
+                quantita = @quantita,
+                formato = @formato,
+                nomeFile = @nomeFile
+            WHERE id = @id;
+        ");
+        cmd.Parameters.AddWithValue("@id", l.Id);
+        cmd.Parameters.AddWithValue("@titolo", l.Titolo);
+        cmd.Parameters.AddWithValue("@autore", l.Autore);
+        cmd.Parameters.AddWithValue("@genere", l.Genere);
+        cmd.Parameters.AddWithValue("@quantita", l.Quantita);
+        cmd.Parameters.AddWithValue("@formato", l.Formato);
+        cmd.Parameters.AddWithValue("@nomeFile", l.NomeFile);
+
+        return _db.ExecQuery(cmd);
+    }
+
+    public List<Entity> FindAutore(string autore)
+    {
+        SqlCommand cmd = new("SELECT * FROM Libri WHERE autore = @autore;");
+        cmd.Parameters.AddWithValue("@autore", autore);
+        return this.ReadMany(cmd);
+    }
+
+    public List<Entity> FindTitolo(string titolo)
+    {
+        SqlCommand cmd = new("SELECT * FROM Libri WHERE titolo LIKE '%' + @titolo + '%';");
+        cmd.Parameters.AddWithValue("@titolo", titolo);
+        return this.ReadMany(cmd);
     }
 }
