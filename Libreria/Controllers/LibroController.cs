@@ -15,7 +15,7 @@ namespace Libreria.Controllers
             return View();
         }
 
-        public IActionResult Aggiungi(Dictionary<string,string> parametri)
+        public IActionResult Aggiungi(Dictionary<string, string> parametri)
         {
             Libro l = new();
             l.Titolo = parametri["titolo"];
@@ -32,14 +32,14 @@ namespace Libreria.Controllers
 
         public IActionResult ModificaLibri(long id)
         {
-            Libro l = (Libro)DAOLibro.GetInstance().Find(id);
-            if (l != null)
-                return View(l);
-            else
-                return Content("Errore, l'id potrebbe non esistere o qualcosa è andato storto");
+            var libro = (Libro?)DAOLibro.GetInstance().Find(id);
+            if (libro is null)
+                return Content($"Libro con ID {id} non trovato");
+
+            return View(libro);
         }
 
-        public IActionResult Modifica(Dictionary<string,string> parametri)
+        public IActionResult Modifica(Dictionary<string, string> parametri)
         {
             Libro l = new();
             l.Id = long.Parse(parametri["id"]);
