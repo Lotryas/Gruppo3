@@ -1,10 +1,14 @@
 ﻿@using Libreria.Models;
 
+@model Utente;
+
+@{
+    ViewData["Title"] = "Registrati";
+}
+
 @section Scripts {
     <script src="~/js/Login/ControlliLogin.js"></script>
 }
-
-@model Utente;
 
 <section class="auth-container">
     <div class="auth-card">
@@ -13,6 +17,10 @@
             <div class="form-group">
                 <label for="nome">Nome</label>
                 <input type="text" id="nome" name="nome" placeholder="Inserisci il nome" />
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Inserisci l'indirizzo email" />
             </div>
             <div class="form-group">
                 <label for="pass">Password</label>

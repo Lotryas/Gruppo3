@@ -1,4 +1,5 @@
-﻿@model Libreria.Models.Utente
+﻿@using Libreria.Models
+@model Utente
 
 <!DOCTYPE html>
 <html>
@@ -10,11 +11,14 @@
 <body>
     <div>
         <h1>
-            Profilo di @Model.Nome
+            Profilo di @Model.Nome<br />
+            @Model.Email
+            
         </h1>
-        <h4>Codice Utente: @Model.Id</h4>
+        <h4>Codice Utente: @Model.Id </h4>
         <p>
            Hai effettuato l'accesso come: @Model.Ruolo
+
         </p>
     </div>
     <a href="/Login/Logout">LOGOUT</a>
