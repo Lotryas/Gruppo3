@@ -1,51 +1,33 @@
-﻿@model Libreria.Models.Utente
+﻿@using Libreria.Models;
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Registrazione</title>
-    <link rel="stylesheet" type="text/css" href="/css/Login/StileRegistrazione.css" />
+@section Scripts {
     <script src="~/js/Login/ControlliLogin.js"></script>
-</head>
-<body>
-    <div class="titolo">
-        <h1>CREA IL TUO NUOVO PROFILO</h1>
-    </div>
+}
 
-    <div class="dati">
-        <form action="/Login/Salva" onsubmit="return controlli_registrazione()" method="post">
-            <table>
-                <tr colspan="2">
-                    INSERISCI DATI
-                </tr>
-                <tr>
-                    <td>
-                        NOME
-                    </td>
-                    <td>
-                        <input type="text" name="nome" id="nome" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        PASSWORD
-                    </td>
-                    <td>
-                        <input type="password" name="pass" id="password1" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        REINSERISCI PASSWORD
-                    </td>
-                    <td>
-                        <input type="password" id="password2" />
-                    </td>
-                </tr>
-            </table>
-            <input type="submit" value="REGISTRATI" id="bottone" />
+@model Utente;
+
+<section class="auth-container">
+    <div class="auth-card">
+        <h1 class="auth-title">Crea il tuo nuovo profilo</h1>
+        <form action="/Login/Salva" onsubmit="return controlli_registrazione()" method="POST">
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome" placeholder="Inserisci il nome" />
+            </div>
+            <div class="form-group">
+                <label for="pass">Password</label>
+                <input type="password" id="password1" name="pass" placeholder="Inserisci la password" />
+            </div>
+            <div class="form-group">
+                <label for="pass">Conferma password</label>
+                <input type="password" id="password2" placeholder="Conferma la password" />
+            </div>
+            <div class="form-buttons justify-end">
+                <button type="submit" class="btn-primary">Registrati</button>
+            </div>
+            <div class="form-links">
+                <a href="/Login/Index">Hai già un account? Accedi</a>
+            </div>
         </form>
     </div>
-</body>
-</html>
+</section>

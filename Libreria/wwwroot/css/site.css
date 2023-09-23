@@ -60,7 +60,7 @@ a {
 }
 
 form label {
-  display: block;
+  display: inline-block;
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--gray-700);
