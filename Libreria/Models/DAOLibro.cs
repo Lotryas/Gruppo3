@@ -34,6 +34,8 @@ namespace Libreria.Models
                 return null;
             Libro l = new();
             l.PopulateFromRecord(record);
+            // Per qualche motivo senza questa linea il nome del file non viene salvato nell'oggetto
+            l.NomeFile = (string)record["nomeFile"];
             return l;
             
         }
@@ -71,15 +73,15 @@ namespace Libreria.Models
         public bool Update(Entity entity)
         {
             Libro l = (Libro)entity;
-            SqlCommand cmd = new SqlCommand("UPDATE INTO Libri\n" +
+            SqlCommand cmd = new SqlCommand("UPDATE Libri\n" +
                 "SET\n" +
-                @"titolo = @titolo,\n" +
-                @"autore = @autore,\n" +
-                @"genere = @genere,\n" +
-                @"quantita = @quantita,\n" +
-                @"formato = @formato,\n" +
-                @"nomeFile = @nomeFile\n" +
-                @"WHERE id = @id;");
+                "titolo = @titolo,\n" +
+                "autore = @autore,\n" +
+                "genere = @genere,\n" +
+                "quantita = @quantita,\n" +
+                "formato = @formato,\n" +
+                "nomeFile = @nomeFile\n" +
+                "WHERE id = @id;");
             cmd.Parameters.AddWithValue("@id", l.Id);
             cmd.Parameters.AddWithValue("@titolo", l.Titolo);
             cmd.Parameters.AddWithValue("@autore", l.Autore);

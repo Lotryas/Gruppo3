@@ -1,0 +1,82 @@
+﻿@model Libro
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Aggiungi Libro</title>
+    <script src="~/js/Libro/ControlloLibro.js"></script>
+</head>
+<body>
+    <div class="titolo">
+        <h1>MODIFICA IL LIBRO</h1>
+    </div>
+
+    <div class="dati">
+        <form action="/Libro/Modifica" onsubmit="return controllaDati()">
+            <table>
+                <tr>
+                    <td>
+                        TITOLO
+                    </td>
+                    <td>
+                        <input type="text" name="titolo" id="titolo" value="@Model.Titolo"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        AUTORE
+                    </td>
+                    <td>
+                        <input type="text" name="autore" id="autore" value="@Model.Autore" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        GENERE
+                    </td>
+                    <td>
+                        <input type="text" name="genere" id="genere" value="@Model.Genere"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        QUANTITA'
+                    </td>
+                    <td>
+                        <input type="number" name="quantita" id="quantita" value="@Model.Quantita" />
+                    </td>
+                </tr>
+                <tr colspan="3">
+                    <td>
+                        DIGITALE
+                    </td>
+                    @{
+                        // Controllo per mettere precompilata l'opzione del formato.
+                        string disponibileSi = Model.Formato ? "checked" : "";
+                        string disponibileNo = Model.Formato ? "" : "checked";
+                        <td>
+                            <input type="radio" id="digitale_si" name="formato" value="true" @disponibileSi />
+                            <label for="digitale_si">Si</label>
+                        </td>
+                        <td>
+                            <input type="radio" id="digitale_no" name="formato" value="false" @disponibileNo />
+                            <label for="digitale_no">No</label>
+                        </td>
+                    }
+                </tr>
+                <tr>
+                    <td>
+                        NOME FILE
+                    </td>
+                    <td>
+                        <input type="text" name="nomefile" id="nomefile" value="@Model.NomeFile"/>
+                    </td>
+                </tr>
+                <input type="number" name="id" id="idlibro" value="@Model.Id" hidden />
+            </table>
+            <input type="submit" value="AGGIORNA" id="bottone" />
+        </form>
+    </div>
+</body>
+</html>
