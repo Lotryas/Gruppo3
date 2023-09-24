@@ -15,13 +15,15 @@
 function controlli_registrazione()
 {
     
-    if (document.getElementById('nome').value.length < 2) {
-        alert("IL NOME UTENTE " + document.getElementById('nome').value + " CHE HAI INSERITO E' TROPPO BREVE");
+    if (document.getElementById('nome').value.length < 2 ||
+        document.getElementById('nome').value.length > 50) {
+        alert("Il nome utente inserito non è valido");
         return false;
     }
 
-    if (document.getElementById('email').value.length < 3) {
-        alert("L'EMAIL " + document.getElementById('email').value + " CHE HAI INSERITO E' TROPPO BREVE");
+    if (document.getElementById('email').value.length < 3 ||
+        document.getElementById('email').value.length > 255) {
+        alert("L'email inserita non è valida");
         return false;
     }
 
