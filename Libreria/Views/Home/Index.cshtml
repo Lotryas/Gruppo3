@@ -1,7 +1,37 @@
-﻿@{
+﻿@using Libreria.Models;
+@model List<Libro>; 
+@{
     ViewData["Title"] = "Home";
 }
-
+<!--
+        inserire un elenco confor each con le locandine, lista libri titolo,autore,genere,quantita,
+        una volta fatta la lista se la quanità >0 button "prendi in prestito" else mostra "non disponibile"
+    -->
 <section>
     Home Page
+    <table>
+       <tr>
+
+
+            @foreach(var libro in Model)
+            {
+
+                <p> @libro.Titolo</p>
+                <p> @libro.Autore</p>
+                <p> @libro.Genere</p>
+                <p> @libro.Quantita</p>
+
+                @if (libro.Quantita > 0)
+                {
+                    <button onclick="PrendiInPrestito(@libro.Id)">Prendi in prestito</button>
+                }
+                else
+                {
+                    <span>Non disponibile</span>
+                }
+
+            }
+
+        </tr>
+    </table>
 </section>
