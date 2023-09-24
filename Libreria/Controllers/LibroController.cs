@@ -24,6 +24,7 @@ namespace Libreria.Controllers
             l.Quantita = int.Parse(parametri["quantita"]);
             l.Formato = bool.Parse(parametri["formato"]);
             l.NomeFile = parametri["nomefile"];
+            l.Locandina = parametri["locandina"];
             if (DAOLibro.GetInstance().Insert(l))
                 return Content("Libro aggiunto al database!");
             else
@@ -49,6 +50,7 @@ namespace Libreria.Controllers
             l.Quantita = int.Parse(parametri["quantita"]);
             l.Formato = bool.Parse(parametri["formato"]);
             l.NomeFile = parametri["nomefile"];
+            l.Locandina = parametri["locandina"];
             Console.WriteLine(l.ToString());
             if (DAOLibro.GetInstance().Update(l))
                 return Content("Libro aggiornato con successo!");
