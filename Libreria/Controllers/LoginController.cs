@@ -61,7 +61,9 @@ namespace Libreria.Controllers
 
             if (DAOUtente.GetInstance().Insert(utente))
             {
-                return Content("Registrazione avvenuta con successo");
+                ilogger.LogInformation($"UTENTE LOGGATO: {utente.Email}");
+                utenteLoggato = DAOUtente.GetInstance().Find(utente.Email) as Utente;
+                return View("Views/Login/Profilo.cshtml", utenteLoggato);
             }
             else
             {

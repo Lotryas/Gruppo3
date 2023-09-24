@@ -23,7 +23,9 @@
 
                 @if (l.Quantita > 0)
                 {
-                    <button onclick="PrendiInPrestito(@libro.Id)">Prendi in prestito</button>
+                    <a href="/Login/Index">
+                        <button onclick="PrendiInPrestito(@libro.Id)">Prendi in prestito</button>
+                    </a>
                 }
                 else
                 {
