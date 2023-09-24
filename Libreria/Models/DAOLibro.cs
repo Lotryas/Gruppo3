@@ -61,8 +61,8 @@ public class DAOLibro : IDAO
         Libro l = (Libro)entity;
 
         SqlCommand cmd = new(@"
-            INSERT INTO Libri (titolo, autore, genere, quantita, formato, nomeFile)
-            VALUES (@titolo, @autore, @genere, @quantita, @formato, @nomeFile);
+            INSERT INTO Libri (titolo, autore, genere, quantita, formato, nomeFile,locandina)
+            VALUES (@titolo, @autore, @genere, @quantita, @formato, @nomeFile,@locandina);
         ");
         cmd.Parameters.AddWithValue("@titolo", l.Titolo);
         cmd.Parameters.AddWithValue("@autore", l.Autore);
@@ -70,7 +70,7 @@ public class DAOLibro : IDAO
         cmd.Parameters.AddWithValue("@quantita", l.Quantita);
         cmd.Parameters.AddWithValue("@formato", l.Formato);
         cmd.Parameters.AddWithValue("@nomeFile", l.NomeFile);
-
+        cmd.Parameters.AddWithValue("@locandina", l.Locandina);
         return _db.ExecQuery(cmd);
     }
 
@@ -91,7 +91,8 @@ public class DAOLibro : IDAO
                 genere = @genere,
                 quantita = @quantita,
                 formato = @formato,
-                nomeFile = @nomeFile
+                nomeFile = @nomeFile,
+                locandina=@locandina
             WHERE id = @id;
         ");
         cmd.Parameters.AddWithValue("@id", l.Id);
@@ -101,7 +102,7 @@ public class DAOLibro : IDAO
         cmd.Parameters.AddWithValue("@quantita", l.Quantita);
         cmd.Parameters.AddWithValue("@formato", l.Formato);
         cmd.Parameters.AddWithValue("@nomeFile", l.NomeFile);
-
+        cmd.Parameters.AddWithValue("@locandina", l.Locandina);
         return _db.ExecQuery(cmd);
     }
 

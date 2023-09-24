@@ -16,10 +16,16 @@
             @foreach(var libro in Model)
             {
                 var l = (Libro)libro;
+                <td>
+                <div class="Locandina">
+                    <img type="img" src="@l.Locandina" id="locandina" width="200" height="270"></img>
+                </div>
+
                 <p> @l.Titolo</p>
                 <p> @l.Autore</p>
                 <p> @l.Genere</p>
                 <p> @l.Quantita</p>
+                
 
                 @if (l.Quantita > 0)
                 {
@@ -31,9 +37,11 @@
                 {
                     <span>Non disponibile</span>
                 }
+                </td>
 
             }
 
         </tr>
     </table>
+    <a href="/Libro/ModificaLibri/1">AAAAAAAAAAAAAAAAAAAAAAAA</a>
 </section>

@@ -10,6 +10,7 @@ namespace Libreria.Models
         public int Quantita { get; set; }
         public bool Formato { get; set; }
         public string NomeFile { get; set; }
+        public string Locandina { get; set; }
 
       public Libro() 
         {
@@ -17,9 +18,10 @@ namespace Libreria.Models
             Autore = "";
             Genere = "";
             NomeFile = "";
+            Locandina = "";
         }
 
-        public Libro(int id, string titolo, string autore, string genere, int quantita, bool formato, string nomeFile) : base(id)
+        public Libro(int id, string titolo, string autore, string genere, int quantita, bool formato, string nomeFile,string locandina) : base(id)
         {
             Titolo = titolo;
             Autore = autore;
@@ -27,6 +29,7 @@ namespace Libreria.Models
             Quantita = quantita;
             Formato = formato;
             NomeFile = nomeFile;
+            Locandina = locandina;
         }
     }
 }
