@@ -17,7 +17,8 @@ CREATE TABLE Libri (
 	genere VARCHAR(100),
 	quantita INT,
 	formato BIT,
-	nomeFile VARCHAR(255)
+	nomeFile VARCHAR(255),
+	locandina text
 );
 
 CREATE TABLE Utenti_Libri (
@@ -35,11 +36,11 @@ VALUES
 ('Bob', 'bob.marley@hotmail.com', HASHBYTES('Sha2_512', N'hashed_password_2'), 'Amministratore'),
 ('Charlie', 'charlieedison@gmail.com', HASHBYTES('Sha2_512', N'hashed_password_3'), 'Dipendente');
 
-INSERT INTO Libri (titolo, autore, genere, quantita, formato, nomeFile)
+INSERT INTO Libri (titolo, autore, genere, quantita, formato, nomeFile,locandina)
 VALUES
-('Il Signore degli Anelli', 'J.R.R. Tolkien', 'Fantasy', 10, 0, 'signore_degli_anelli.pdf'),
-('1984', 'George Orwell', 'Distopia', 5, 1, '1984.pdf'),
-('Harry Potter e la Pietra Filosofale', 'J.K. Rowling', 'Fantasy', 7, 0, 'harry_potter.pdf');
+('Il Signore degli Anelli', 'J.R.R. Tolkien', 'Fantasy', 10, 0, 'signore_degli_anelli.pdf','https://pad.mymovies.it/filmclub/2002/01/011/locandina.jpg'),
+('1984', 'George Orwell', 'Distopia', 5, 1, '1984.pdf','https://cdn.kobo.com/book-images/c9472126-7f96-402d-ba57-5ba4c0f4b238/1200/1200/False/nineteen-eighty-four-1984-george.jpg'),
+('Harry Potter e la Pietra Filosofale', 'J.K. Rowling', 'Fantasy', 7, 0, 'harry_potter.pdf','https://www.lafeltrinelli.it/images/9788831003384_0_536_0_75.jpg');
 
 INSERT INTO Utenti_Libri (idUtente, idLibro)
 VALUES
