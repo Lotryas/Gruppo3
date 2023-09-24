@@ -1,5 +1,5 @@
 ﻿@using Libreria.Models;
-@model List<Libro>; 
+@model List<Utility.Entity>
 @{
     ViewData["Title"] = "Home";
 }
@@ -15,13 +15,13 @@
 
             @foreach(var libro in Model)
             {
+                var l = (Libro)libro;
+                <p> @l.Titolo</p>
+                <p> @l.Autore</p>
+                <p> @l.Genere</p>
+                <p> @l.Quantita</p>
 
-                <p> @libro.Titolo</p>
-                <p> @libro.Autore</p>
-                <p> @libro.Genere</p>
-                <p> @libro.Quantita</p>
-
-                @if (libro.Quantita > 0)
+                @if (l.Quantita > 0)
                 {
                     <button onclick="PrendiInPrestito(@libro.Id)">Prendi in prestito</button>
                 }

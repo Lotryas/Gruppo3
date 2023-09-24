@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Libreria.Models;
+using Utility;
 
 namespace Libreria.Controllers;
 
@@ -17,7 +18,11 @@ public class HomeController : Controller
     {
         return View();
     }
-
+    public IActionResult Elenco()
+    {
+        List<Entity> libri = DAOLibro.GetInstance().ReadAll();
+            return View(libri);
+    }
     public IActionResult Privacy()
     {
         return View();

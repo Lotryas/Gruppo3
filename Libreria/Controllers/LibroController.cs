@@ -60,7 +60,7 @@ namespace Libreria.Controllers
         {
             if (DAOLibro.GetInstance().Delete(id))
                 // Sarà eventualmente da cambiare per tornare all'elenco
-                return Redirect("/Home/Index");
+                return Redirect("/Home/Elenco");
             else
                 return Content("Errore nella cancellazione");
         }
