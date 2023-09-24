@@ -110,6 +110,22 @@ form label {
   display: block;
 }
 
+.px-4 {
+  padding: 0 1rem;
+}
+
+.mr-4 {
+  margin-right: 1rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
 .w-6 {
   width: 1.5rem;
 }
@@ -148,6 +164,10 @@ form label {
 
 .flex {
   display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
 }
 
 .flex-grow {
@@ -191,6 +211,10 @@ form label {
   color: var(--gray-600);
 }
 
+.text-orange-300 {
+  color: var(--orange-300);
+}
+
 .text-orange-400 {
   color: var(--orange-400);
 }
@@ -202,6 +226,11 @@ form label {
 .text-base {
   font-size: 1rem;
   line-height: 1.5rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 
 .text-xl {
@@ -222,6 +251,10 @@ form label {
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
+}
+
+.rounded {
+  border-radius: 0.5rem;
 }
 
 .font-semibold {
@@ -377,6 +410,20 @@ form label {
   height: 9.375rem;
   background-color: var(--orange-200);
   border-radius: 0.5rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.625rem 1rem;
+  border: 1px solid transparent;
+  outline: none;
+  border-radius: 0.5rem;
+  background-color: var(--orange-100);
+  font-size: 1rem;
+}
+
+.search-input:focus-visible {
+  border: 1px solid var(--orange-900);
 }
 
 @media (min-width: 768px) {}
