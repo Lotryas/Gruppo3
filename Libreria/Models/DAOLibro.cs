@@ -18,7 +18,7 @@ public class DAOLibro : IDAO
         return _instance ??= new DAOLibro();
     }
 
-    private List<Entity> ReadMany(SqlCommand cmd)
+    private List<Entity> ReadManyLibri(SqlCommand cmd)
     {
         List<Dictionary<string, object>> tabella = _db.ReadMany(cmd);
 
@@ -78,7 +78,7 @@ public class DAOLibro : IDAO
     public List<Entity> ReadAll()
     {
         SqlCommand cmd = new("SELECT * FROM Libri;");
-        return this.ReadMany(cmd);
+        return this.ReadManyLibri(cmd);
     }
 
     public bool Update(Entity entity)
@@ -111,13 +111,13 @@ public class DAOLibro : IDAO
     {
         SqlCommand cmd = new("SELECT * FROM Libri WHERE autore = @autore;");
         cmd.Parameters.AddWithValue("@autore", autore);
-        return this.ReadMany(cmd);
+        return this.ReadManyLibri(cmd);
     }
 
     public List<Entity> FindTitolo(string titolo)
     {
         SqlCommand cmd = new("SELECT * FROM Libri WHERE titolo LIKE '%' + @titolo + '%';");
         cmd.Parameters.AddWithValue("@titolo", titolo);
-        return this.ReadMany(cmd);
+        return this.ReadManyLibri(cmd);
     }
 }

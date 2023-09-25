@@ -78,7 +78,7 @@ namespace Utility
                 {
                     for (int i = 0; i < dr.FieldCount; i++)
                     {
-                        record.Add(dr.GetName(i), dr.GetValue(i));
+                        record.Add(dr.GetName(i).ToLower(), dr.GetValue(i));
                     }
                 }
                 else return null;
@@ -119,7 +119,7 @@ namespace Utility
 
                     for (int i = 0; i < dr.FieldCount; i++)
                     {
-                        record.Add(dr.GetName(i), dr.GetValue(i));
+                        record.Add(dr.GetName(i).ToLower(), dr.GetValue(i));
                     }
 
                     records.Add(record);

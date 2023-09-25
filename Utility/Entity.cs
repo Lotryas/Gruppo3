@@ -43,7 +43,6 @@ namespace Utility
                     {
                         propInfo.SetValue(this, record[keyName]);
                     }
-
                 }
                 catch (Exception ex)
                 {
