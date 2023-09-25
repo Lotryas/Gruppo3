@@ -12,10 +12,6 @@ namespace Libreria.Controllers
 
         public IActionResult AggiungiLibri()
         {
-            if (HttpContext.Items["AuthUser"] is not null)
-            {
-                ViewData["User"] = HttpContext.Items["AuthUser"];
-            }
             return View();
         }
 
@@ -29,6 +25,7 @@ namespace Libreria.Controllers
             l.Formato = bool.Parse(parametri["formato"]);
             l.NomeFile = parametri["nomefile"];
             l.Locandina = parametri["locandina"];
+
             if (DAOLibro.GetInstance().Insert(l))
                 return Content("Libro aggiunto al database!");
             else
@@ -37,11 +34,6 @@ namespace Libreria.Controllers
 
         public IActionResult ModificaLibri(long id)
         {
-            if (HttpContext.Items["AuthUser"] is not null)
-            {
-                ViewData["User"] = HttpContext.Items["AuthUser"];
-            }
-
             var libro = (Libro?)DAOLibro.GetInstance().Find(id);
             if (libro is null)
                 return Content($"Libro con ID {id} non trovato");
@@ -61,6 +53,7 @@ namespace Libreria.Controllers
             l.NomeFile = parametri["nomefile"];
             l.Locandina = parametri["locandina"];
             Console.WriteLine(l.ToString());
+
             if (DAOLibro.GetInstance().Update(l))
                 return Content("Libro aggiornato con successo!");
             else

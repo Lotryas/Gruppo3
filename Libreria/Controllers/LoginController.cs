@@ -73,6 +73,7 @@ namespace Libreria.Controllers
             {
                 return Redirect("/");
             }
+
             return View();
         }
 
@@ -85,8 +86,17 @@ namespace Libreria.Controllers
 
             if (DAOUtente.GetInstance().Insert(utente))
             {
-                ilogger.LogInformation($"UTENTE LOGGATO: {utente.Email}");
+                CookieOptions opts = new();
+                opts.Expires = DateTime.Now.AddYears(1);
+                opts.HttpOnly = true;
+                opts.Secure = true;
+                opts.SameSite = SameSiteMode.Lax;
+
+                Response.Cookies.Append("auth", utente.Email, opts);
+
                 utenteLoggato = DAOUtente.GetInstance().Find(utente.Email) as Utente;
+                ilogger.LogInformation($"UTENTE LOGGATO: {utente.Email}");
+
                 return View("Views/Login/Profilo.cshtml", utenteLoggato);
             }
             else

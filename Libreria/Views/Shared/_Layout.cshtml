@@ -24,7 +24,7 @@
                     </li>
                 </ul>
                 <ul class="nav-items">
-                    @if (ViewData["User"] is null)
+                    @if (Context.Items["AuthUser"] is null)
                     {
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Login" asp-action="Index">Accedi</a>

@@ -18,21 +18,15 @@ public class HomeController : Controller
     {
         return View();
     }
+
     public IActionResult Elenco()
     {
-        if (HttpContext.Items["AuthUser"] is not null)
-        {
-            ViewData["User"] = HttpContext.Items["AuthUser"];
-        }
         List<Entity> libri = DAOLibro.GetInstance().ReadAll();
         return View(libri);
     }
+
     public IActionResult Privacy()
     {
-        if (HttpContext.Items["AuthUser"] is not null)
-        {
-            ViewData["User"] = HttpContext.Items["AuthUser"];
-        }
         return View();
     }
 
