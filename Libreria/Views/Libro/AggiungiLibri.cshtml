@@ -1,83 +1,53 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Aggiungi Libro</title>
-    <script src="~/js/Libro/ControlloLibro.js"></script>
-</head>
-<body>
-    <div class="titolo">
-        <h1>AGGIUNGI UN LIBRO</h1>
-    </div> 
+﻿@{
+    ViewData["Title"] = "Aggiungi libro";
+}
 
-    <div class="dati">
-        <form action="/Libro/Aggiungi" onsubmit="return controllaDati()">
-            <table>
-                <tr>
-                    <td>
-                        TITOLO
-                    </td>
-                    <td>
-                        <input type="text" name="titolo" id="titolo"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        AUTORE
-                    </td>
-                    <td>
-                        <input type="text" name="autore" id="autore" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        GENERE
-                    </td>
-                    <td>
-                        <input type="text" name="genere" id="genere" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        QUANTITA'
-                    </td>
-                    <td>
-                        <input type="number" name="quantita" id="quantita" />
-                    </td>
-                </tr>
-                <tr colspan="3">
-                    <td>
-                        DIGITALE
-                    </td>
-                    <td>
-                        <input type="radio" id="digitale_si" name="formato" value="true" checked />
-                        <label for="digitale_si">Si</label>
-                    </td>
-                    <td>
-                        <input type="radio" id="digitale_no" name="formato" value="false" />
-                        <label for="digitale_no">No</label>
-                    </td>
-                    
-                </tr>
-                <tr>
-                    <td>
-                        NOME FILE
-                    </td>
-                    <td>
-                        <input type="text" name="nomefile" id="nomefile" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        URL Locandina
-                    </td>
-                    <td>
-                        <textarea name="locandina" id="locandina"></textarea>
-                    </td>
-                </tr>
-            </table>
-            <input type="submit" value="SALVA" id="bottone" />
+@section Scripts {
+    <script src="~/js/Libro/ControlloLibro.js"></script>
+}
+
+<section class="flex justify-center">
+    <div class="auth-card">
+        <h1 class="auth-title">Aggiungi un libro</h1>
+        <form action="/Libro/Aggiungi" onsubmit="return controllaDati()" method="POST">
+            <div class="form-group">
+                <label for="titolo">Titolo</label>
+                <input type="text" name="titolo" id="titolo" />
+            </div>
+            <div class="form-group">
+                <label for="autore">Autore</label>
+                <input type="text" name="autore" id="autore" />
+            </div>
+            <div class="form-group">
+                <label for="genere">Genere</label>
+                <input type="text" name="genere" id="genere" />
+            </div>
+            <div class="form-group">
+                <label for="quantita">Quantità</label>
+                <input type="number" name="quantita" id="quantita" />
+            </div>
+            <div class="form-group">
+                <label>Digitale</label>
+                <div class="flex gap-2">
+                    <input type="radio" id="digitale_si" name="formato" value="true" checked />
+                    <label for="digitale_si">Sì</label>
+                </div>
+                <div class="flex gap-2">
+                    <input type="radio" id="digitale_no" name="formato" value="false" />
+                    <label for="digitale_no">No</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="nomeFile">Nome file</label>
+                <input type="text" name="nomefile" id="nomefile" />
+            </div>
+            <div class="form-group">
+                <label for="locandina">Copertina</label>
+                <textarea name="locandina" id="locandina"></textarea>
+            </div>
+            <div class="form-buttons justify-end">
+                <button type="submit" class="btn-primary">Aggiungi</button>
+            </div>
         </form>
     </div>
-</body>
-</html>
+</section>
