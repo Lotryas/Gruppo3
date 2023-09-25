@@ -8,7 +8,6 @@ namespace Libreria.Controllers
     public class LoginController : Controller
     {
         private ILogger<LoginController> ilogger;
-        private static Utente? utenteLoggato = null;
 
         public LoginController(ILogger<LoginController> logger)
         {
@@ -39,11 +38,9 @@ namespace Libreria.Controllers
                 opts.SameSite = SameSiteMode.Lax;
 
                 Response.Cookies.Append("auth", email, opts);
-
-                utenteLoggato = (Utente?)DAOUtente.GetInstance().Find(email);
                 ilogger.LogInformation($"UTENTE LOGGATO: {email}");
 
-                return View("Views/Login/Profilo.cshtml", utenteLoggato);
+                return Redirect("/Login/Profilo");
             }
 
             return Redirect("Index");
@@ -51,18 +48,21 @@ namespace Libreria.Controllers
 
         public IActionResult Profilo()
         {
-            if (HttpContext.Items["AuthUser"] is not null)
+            if (HttpContext.Items["AuthUser"] is null)
             {
-                utenteLoggato = (Utente?)HttpContext.Items["AuthUser"];
+                return Redirect("/Login/Index");
             }
-            return View(utenteLoggato);
+
+            return View();
         }
 
         public IActionResult Logout()
         {
+            Utente? user = (Utente?)HttpContext.Items["AuthUser"];
+
             Response.Cookies.Delete("auth");
-            ilogger.LogInformation($"LOGOUT: {utenteLoggato?.Email}");
-            utenteLoggato = null;
+            ilogger.LogInformation($"LOGOUT: {user?.Email}");
+
             return Redirect("Index");
 
         }
@@ -93,11 +93,9 @@ namespace Libreria.Controllers
                 opts.SameSite = SameSiteMode.Lax;
 
                 Response.Cookies.Append("auth", utente.Email, opts);
-
-                utenteLoggato = DAOUtente.GetInstance().Find(utente.Email) as Utente;
                 ilogger.LogInformation($"UTENTE LOGGATO: {utente.Email}");
 
-                return View("Views/Login/Profilo.cshtml", utenteLoggato);
+                return Redirect("/Login/Profilo");
             }
             else
             {
