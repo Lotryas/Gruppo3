@@ -1,90 +1,61 @@
 ﻿@model Libro
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Aggiungi Libro</title>
-    <script src="~/js/Libro/ControlloLibro.js"></script>
-</head>
-<body>
-    <div class="titolo">
-        <h1>MODIFICA IL LIBRO</h1>
-    </div>
+@{
+    ViewData["Title"] = "Modifica libro";
+}
 
-    <div class="dati">
-        <form action="/Libro/Modifica" onsubmit="return controllaDati()">
-            <table>
-                <tr>
-                    <td>
-                        TITOLO
-                    </td>
-                    <td>
-                        <input type="text" name="titolo" id="titolo" value="@Model.Titolo"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        AUTORE
-                    </td>
-                    <td>
-                        <input type="text" name="autore" id="autore" value="@Model.Autore" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        GENERE
-                    </td>
-                    <td>
-                        <input type="text" name="genere" id="genere" value="@Model.Genere"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        QUANTITA'
-                    </td>
-                    <td>
-                        <input type="number" name="quantita" id="quantita" value="@Model.Quantita" />
-                    </td>
-                </tr>
-                <tr colspan="3">
-                    <td>
-                        DIGITALE
-                    </td>
-                    @{
-                        // Controllo per mettere precompilata l'opzione del formato.
-                        string disponibileSi = Model.Formato ? "checked" : "";
-                        string disponibileNo = Model.Formato ? "" : "checked";
-                        <td>
-                            <input type="radio" id="digitale_si" name="formato" value="true" @disponibileSi />
-                            <label for="digitale_si">Si</label>
-                        </td>
-                        <td>
-                            <input type="radio" id="digitale_no" name="formato" value="false" @disponibileNo />
-                            <label for="digitale_no">No</label>
-                        </td>
-                    }
-                </tr>
-                <tr>
-                    <td>
-                        NOME FILE
-                    </td>
-                    <td>
-                        <input type="text" name="nomefile" id="nomefile" value="@Model.NomeFile"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        URL Locandina
-                    </td>
-                    <td>
-                        <textarea name="locandina" id="locandina">@Model.Locandina</textarea>
-                    </td>
-                </tr>
-                <input type="number" name="id" id="idlibro" value="@Model.Id" hidden />
-            </table>
-            <input type="submit" value="AGGIORNA" id="bottone" />
+@section Scripts {
+    <script src="~/js/Libro/ControlloLibro.js"></script>
+}
+
+<section class="flex justify-center">
+    <div class="auth-card">
+        <h1 class="auth-title">Modifica il libro</h1>
+        <form action="/Libro/Modifica" onsubmit="return controllaDati()" method="POST">
+            <input type="number" name="id" id="idlibro" value="@Model.Id" hidden />
+            <div class="form-group">
+                <label for="titolo">Titolo</label>
+                <input type="text" name="titolo" id="titolo" value="@Model.Titolo" />
+            </div>
+            <div class="form-group">
+                <label for="autore">Autore</label>
+                <input type="text" name="autore" id="autore" value="@Model.Autore" />
+            </div>
+            <div class="form-group">
+                <label for="genere">Genere</label>
+                <input type="text" name="genere" id="genere" value="@Model.Genere" />
+            </div>
+            <div class="form-group">
+                <label for="quantita">Quantità</label>
+                <input type="number" name="quantita" id="quantita" value="@Model.Quantita" />
+            </div>
+            <div class="form-group">
+                @{
+                    // Controllo per mettere precompilata l'opzione del formato.
+                    string disponibileSi = Model.Formato ? "checked" : "";
+                    string disponibileNo = Model.Formato ? "" : "checked";
+                }
+                <label>Digitale</label>
+                <div class="flex gap-2">
+                    <input type="radio" id="digitale_si" name="formato" value="true" @disponibileSi />
+                    <label for="digitale_si">Sì</label>
+                </div>
+                <div class="flex gap-2">
+                    <input type="radio" id="digitale_no" name="formato" value="false" @disponibileNo />
+                    <label for="digitale_no">No</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="nomeFile">Nome file</label>
+                <input type="text" name="nomefile" id="nomefile" value="@Model.NomeFile" />
+            </div>
+            <div class="form-group">
+                <label for="locandina">Copertina</label>
+                <textarea name="locandina" id="locandina">@Model.Locandina</textarea>
+            </div>
+            <div class="form-buttons justify-end">
+                <button type="submit" class="btn-primary">Modifica</button>
+            </div>
         </form>
     </div>
-</body>
-</html>
+</section>
