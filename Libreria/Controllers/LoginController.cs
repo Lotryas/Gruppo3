@@ -49,6 +49,15 @@ namespace Libreria.Controllers
             return Redirect("Index");
         }
 
+        public IActionResult Profilo()
+        {
+            if (HttpContext.Items["AuthUser"] is not null)
+            {
+                utenteLoggato = (Utente?)HttpContext.Items["AuthUser"];
+            }
+            return View(utenteLoggato);
+        }
+
         public IActionResult Logout()
         {
             Response.Cookies.Delete("auth");
@@ -60,6 +69,10 @@ namespace Libreria.Controllers
 
         public IActionResult Registrazione()
         {
+            if (HttpContext.Items["AuthUser"] is not null)
+            {
+                return Redirect("/");
+            }
             return View();
         }
 

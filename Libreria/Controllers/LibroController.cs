@@ -12,6 +12,10 @@ namespace Libreria.Controllers
 
         public IActionResult AggiungiLibri()
         {
+            if (HttpContext.Items["AuthUser"] is not null)
+            {
+                ViewData["User"] = HttpContext.Items["AuthUser"];
+            }
             return View();
         }
 
@@ -33,6 +37,11 @@ namespace Libreria.Controllers
 
         public IActionResult ModificaLibri(long id)
         {
+            if (HttpContext.Items["AuthUser"] is not null)
+            {
+                ViewData["User"] = HttpContext.Items["AuthUser"];
+            }
+
             var libro = (Libro?)DAOLibro.GetInstance().Find(id);
             if (libro is null)
                 return Content($"Libro con ID {id} non trovato");

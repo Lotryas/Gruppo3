@@ -24,12 +24,21 @@
                     </li>
                 </ul>
                 <ul class="nav-items">
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Login" asp-action="Index">Accedi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Login" asp-action="Registrazione">Registrati</a>
-                    </li>
+                    @if (ViewData["User"] is null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Login" asp-action="Index">Accedi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Login" asp-action="Registrazione">Registrati</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Login" asp-action="Profilo">Profilo</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </nav>
