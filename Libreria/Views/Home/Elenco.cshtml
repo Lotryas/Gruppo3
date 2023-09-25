@@ -7,7 +7,7 @@
 }
 
 <section class="px-4 mb-4">
-    <!-- alla pressione di tasto Enter -> action tipo: /Home/Elenco?search=dune -->
+    <!-- TODO: alla pressione di tasto Enter -> action tipo: /Home/Elenco?search=dune -->
     <form action="#">
         <input type="search" name="search" id="search" placeholder="Cerca per titolo" class="search-input">
     </form>
@@ -47,7 +47,7 @@
                     @if (libro.Quantita > 0)
                     {
                         <small class="mr-4 text-gray-500 font-semibold">(Disponibili: @libro.Quantita)</small>
-                        <!-- esempio href: /Libri/Prestito/4 -->
+                        // TODO: esempio href: /Libri/Prestito/4
                         <a href="#" class="btn-primary">
                             Prendi in prestito
                         </a>
