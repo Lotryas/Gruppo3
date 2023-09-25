@@ -36,9 +36,10 @@ CREATE TABLE Utenti_Libri (
 
 INSERT INTO Utenti (nome, email, pass, ruolo)
 VALUES
-('Alice', 'alice.benedetti@gmail.com', HASHBYTES('Sha2_512', N'hashed_password_1'), 'Dipendente'),
-('Bob', 'bob.marley@hotmail.com', HASHBYTES('Sha2_512', N'hashed_password_2'), 'Amministratore'),
-('Charlie', 'charlieedison@gmail.com', HASHBYTES('Sha2_512', N'hashed_password_3'), 'Dipendente');
+('Alice Bensanelli', 'alice@gmail.com', HASHBYTES('Sha2_512', N'hashed_password_1'), 'Amministratore'),
+('Bob', 'bob@gmail.com', HASHBYTES('Sha2_512', N'hashed_password_2'), 'Dipendente'),
+('Charlie', 'charlie@gmail.com', HASHBYTES('Sha2_512', N'hashed_password_3'), 'Dipendente'),
+('Vasile Blanaru', 'bob@gmail.com', HASHBYTES('Sha2_512', N'Password1234'), 'Dipendente');
 
 INSERT INTO Libri (titolo, autore, genere, quantita, formato, nomeFile,locandina)
 VALUES
