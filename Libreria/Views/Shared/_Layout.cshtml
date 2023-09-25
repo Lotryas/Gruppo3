@@ -35,6 +35,12 @@
                     }
                     else
                     {
+                        if (ViewBag.User.Ruolo == "Amministratore")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Libro" asp-action="AggiungiLibri">Aggiungi Libro</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Login" asp-action="Profilo">Profilo</a>
                         </li>
