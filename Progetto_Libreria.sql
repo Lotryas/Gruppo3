@@ -39,7 +39,7 @@ VALUES
 ('Alice Bensanelli', 'alice@gmail.com', HASHBYTES('Sha2_512', N'hashed_password_1'), 'Amministratore'),
 ('Bob', 'bob@gmail.com', HASHBYTES('Sha2_512', N'hashed_password_2'), 'Dipendente'),
 ('Charlie', 'charlie@gmail.com', HASHBYTES('Sha2_512', N'hashed_password_3'), 'Dipendente'),
-('Vasile Blanaru', 'bob@gmail.com', HASHBYTES('Sha2_512', N'Password1234'), 'Dipendente');
+('Vasile Blanaru', 'vasile@gmail.com', HASHBYTES('Sha2_512', N'Password1234'), 'Dipendente');
 
 INSERT INTO Libri (titolo, autore, genere, quantita, formato, nomeFile,locandina)
 VALUES
