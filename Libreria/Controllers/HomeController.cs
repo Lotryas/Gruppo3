@@ -19,10 +19,19 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Elenco()
+    public IActionResult Elenco(string search)
     {
-        List<Entity> libri = DAOLibro.GetInstance().ReadAll();
-        return View(libri);
+        if (search != null)
+        {
+            List<Entity> libri= DAOLibro.GetInstance().FindTitolo(search);
+            return View(libri);
+        }
+        else
+        {
+            List<Entity> libri = DAOLibro.GetInstance().ReadAll();
+            return View(libri);
+        }
+        
     }
 
     public IActionResult Privacy()
@@ -35,4 +44,5 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+
 }
