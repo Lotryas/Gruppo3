@@ -21,7 +21,7 @@ public class HomeController : Controller
     public IActionResult Elenco()
     {
         List<Entity> libri = DAOLibro.GetInstance().ReadAll();
-            return View(libri);
+        return View(libri);
     }
     public IActionResult Privacy()
     {

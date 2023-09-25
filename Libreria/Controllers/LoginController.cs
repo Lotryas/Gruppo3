@@ -10,7 +10,6 @@ namespace Libreria.Controllers
         private ILogger<LoginController> ilogger;
         private static Utente? utenteLoggato = null;
 
-
         public LoginController(ILogger<LoginController> logger)
         {
             ilogger = logger;
@@ -18,6 +17,11 @@ namespace Libreria.Controllers
 
         public IActionResult Index()
         {
+            if (HttpContext.Items["AuthUser"] is not null)
+            {
+                return Redirect("/");
+            }
+
             return View();
         }
 
@@ -28,19 +32,26 @@ namespace Libreria.Controllers
 
             if (DAOUtente.GetInstance().Validate(email, password))
             {
-                ilogger.LogInformation($"UTENTE LOGGATO: {email}");
+                CookieOptions opts = new();
+                opts.Expires = DateTime.Now.AddYears(1);
+                opts.HttpOnly = true;
+                opts.Secure = true;
+                opts.SameSite = SameSiteMode.Lax;
+
+                Response.Cookies.Append("auth", email, opts);
+
                 utenteLoggato = (Utente?)DAOUtente.GetInstance().Find(email);
+                ilogger.LogInformation($"UTENTE LOGGATO: {email}");
+
                 return View("Views/Login/Profilo.cshtml", utenteLoggato);
             }
-            else
-            {
-                return Redirect("Index");
-            }
 
+            return Redirect("Index");
         }
 
         public IActionResult Logout()
         {
+            Response.Cookies.Delete("auth");
             ilogger.LogInformation($"LOGOUT: {utenteLoggato?.Email}");
             utenteLoggato = null;
             return Redirect("Index");

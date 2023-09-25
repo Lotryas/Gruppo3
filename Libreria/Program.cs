@@ -1,3 +1,5 @@
+using Libreria.Middleware;
+
 string[] lines = File.ReadAllLines("./Config/Config.txt");
 Config.ConnectionString.SetConnectionString(lines[0]);
 
@@ -18,6 +20,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseAuthMiddleware();
 
 app.UseRouting();
 
