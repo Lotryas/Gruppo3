@@ -20,6 +20,10 @@ public class AuthMiddleware
             Utente? user = (Utente?)DAOUtente.GetInstance().Find(authEmail);
             context.Items["AuthUser"] = user;
         }
+        else
+        {
+            context.Items["AuthUser"] = null;
+        }
 
         await _next(context);
     }
