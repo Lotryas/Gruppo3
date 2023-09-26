@@ -17,7 +17,7 @@ public class Utente : Entity
         Ruolo = "";
     }
 
-    public Utente(int id,string nome, string email, string pass, string ruolo): base (id)
+    public Utente(long id,string nome, string email, string pass, string ruolo): base (id)
     {
         Nome = nome;
         Email = email;

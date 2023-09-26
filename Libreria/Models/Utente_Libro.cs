@@ -7,7 +7,7 @@ namespace Libreria.Models
 
         public Utente? Utente { get; set; }
         public Libro? Libro { get; set; }
-        public Utente_Libro(int id, Utente? utente, Libro? libro): base(id)
+        public Utente_Libro(long id, Utente? utente, Libro? libro): base(id)
         {
             Utente = utente;
             Libro = libro;

@@ -21,7 +21,7 @@ namespace Libreria.Models
             Locandina = "";
         }
 
-        public Libro(int id, string titolo, string autore, string genere, int quantita, bool formato, string nomeFile,string locandina) : base(id)
+        public Libro(long id, string titolo, string autore, string genere, int quantita, bool formato, string nomeFile,string locandina) : base(id)
         {
             Titolo = titolo;
             Autore = autore;

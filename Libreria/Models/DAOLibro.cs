@@ -50,9 +50,6 @@ public class DAOLibro : IDAO
 
         Libro l = new();
         l.PopulateFromRecord(record);
-        // Per qualche motivo senza questa linea il nome del file non viene salvato nell'oggetto
-        l.NomeFile = (string)record["nomeFile"];
-
         return l;
     }
 
@@ -121,9 +118,4 @@ public class DAOLibro : IDAO
         return this.ReadManyLibri(cmd);
     }
 
-    public List<Entity> FindPrestati(long idUtente)
-    {
-        SqlCommand cmd = new("SELECT * FROM Utenti_Libri WHERE idUtente = @id;");
-        cmd.Parameters.AddWithValue("@id", idUtente);
-    }
 }

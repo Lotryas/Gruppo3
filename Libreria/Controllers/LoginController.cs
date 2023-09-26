@@ -1,7 +1,7 @@
 ﻿using Libreria.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-
+using Utility;
 
 namespace Libreria.Controllers
 {
@@ -52,8 +52,11 @@ namespace Libreria.Controllers
             {
                 return Redirect("/Login/Index");
             }
-
-            return View();
+            Utente? u = (Utente?)HttpContext.Items["AuthUser"];
+            List<Entity> prestati = new();
+            if (u is not null)
+                prestati = DAOUtente_Libro.GetInstance().FindPrestati(u.Id);
+            return View(prestati);
         }
 
         public IActionResult Logout()

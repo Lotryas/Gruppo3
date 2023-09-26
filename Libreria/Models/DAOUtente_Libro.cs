@@ -89,4 +89,22 @@ public class DAOUtente_Libro : IDAO
 
         return _db.ExecQuery(cmd);
     }
+
+    public List<Entity> FindPrestati(long idUtente)
+    {
+        Console.WriteLine(idUtente);
+        SqlCommand cmd = new("SELECT * FROM Utenti_Libri WHERE idUtente = @id;");
+        cmd.Parameters.AddWithValue("@id", idUtente);
+        List<Dictionary<string, object>> tabella = _db.ReadMany(cmd);
+        List<Entity> ris = new();
+        foreach (Dictionary<string, object> riga in tabella)
+        {
+            Utente_Libro ul = new();
+            Console.WriteLine(riga["idlibro"]);
+            ul.Libro = (Libro?)DAOLibro.GetInstance().Find((int)riga["idlibro"]);
+            ris.Add(ul);
+        }
+        return ris;
+
+    }
 }

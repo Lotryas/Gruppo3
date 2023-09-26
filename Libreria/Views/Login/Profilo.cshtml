@@ -1,5 +1,5 @@
 ﻿@using Libreria.Models
-
+@model List<Utente_Libro>
 @{
     ViewData["Title"] = "Il tuo profilo";
     Utente? user = ViewBag.User;
@@ -34,4 +34,10 @@
             </div>
         </div>
     </div>
+</section>
+<section>
+    @foreach (var v in Model)
+    {
+        <p>v.Libro.Titolo</p>
+    }
 </section>
