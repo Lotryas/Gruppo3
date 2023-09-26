@@ -120,4 +120,10 @@ public class DAOLibro : IDAO
         cmd.Parameters.AddWithValue("@titolo", titolo);
         return this.ReadMany(cmd);
     }
+
+    public List<Entity> FindPrestati(long idUtente)
+    {
+        SqlCommand cmd = new("SELECT * FROM Utenti_Libri WHERE idUtente = @id;");
+        cmd.Parameters.AddWithValue("@id", idUtente);
+    }
 }

@@ -50,9 +50,19 @@
                     {
                         <small class="mr-4 text-gray-500 font-semibold">(Disponibili: @libro.Quantita)</small>
                         // TODO: esempio href: /Libri/Prestito/4
-                        <a href="#" class="btn-primary">
-                            Prendi in prestito
-                        </a>
+                        if (Context.Items["AuthUser"] is null)
+                        {
+                            <a href="/Login/Index" class="btn-primary">
+                                Prendi in prestito
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/Libro/Prestito/@ViewBag.User.Id/@libro.Id" class="btn-primary">
+                                Prendi in prestito
+                            </a>
+                        }
+
                     }
                     else
                     {

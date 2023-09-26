@@ -68,5 +68,24 @@ namespace Libreria.Controllers
             else
                 return Content("Errore nella cancellazione");
         }
+
+        [HttpGet("/Libro/Prestito/{idUtente:int}/{idLibro:int}")]
+        public IActionResult Prestito(long idUtente, long idLibro)
+        {
+            Console.WriteLine(idUtente + " " + idLibro);
+            if (HttpContext.Items["AuthUser"] is not null)
+            {
+                
+                Utente_Libro ul = new();
+                ul.Utente = DAOUtente.GetInstance().Find(idUtente) as Utente;
+                ul.Libro = DAOLibro.GetInstance().Find(idLibro) as Libro;
+                if (DAOUtente_Libro.GetInstance().Insert(ul))
+                    return Content("Il libro è stato aggiunto tra i tuoi prestiti");
+                else
+                    return Content("Errore nell'aggiunta del prestito");
+            }
+            else
+                return Content("Errore, non sei loggato");
+        }
     }
 }
