@@ -66,7 +66,7 @@ namespace Libreria.Controllers
             Response.Cookies.Delete("auth");
             ilogger.LogInformation($"LOGOUT: {user?.Email}");
 
-            return Redirect("Index");
+            return Redirect("/Home/Elenco");
 
         }
 
