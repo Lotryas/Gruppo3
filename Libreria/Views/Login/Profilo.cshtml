@@ -1,5 +1,6 @@
 ﻿@using Libreria.Models
-@model List<Utente_Libro>
+@using Utility
+@model List<Entity>
 @{
     ViewData["Title"] = "Il tuo profilo";
     Utente? user = ViewBag.User;
@@ -35,9 +36,31 @@
         </div>
     </div>
 </section>
-<section>
-    @foreach (var v in Model)
+<section class="libri-container">
+    @foreach (Utente_Libro ul in Model)
     {
-        <p>v.Libro.Titolo</p>
+        <article class="libri-card">
+            <div class="libri-locandina">
+                @if (ul.Libro?.Locandina != "")
+                {
+                    <img type="img" src="@ul.Libro?.Locandina" id="locandina" width="100" height="150" class="rounded">
+                }
+            </div>
+            <div class="flex-grow flex flex-col gap-2">
+                <div class="flex-grow">
+                    <h2 class="text-2xl">@ul.Libro?.Titolo</h2>
+                    <div class="flex items-center gap-2 italic">
+                        <p> @ul.Libro?.Autore</p>
+                        <p>&middot;</p>
+                        <p> @ul.Libro?.Genere</p>
+                    </div>
+                </div>
+                <div class="flex items-center justify-end">
+                    <a href="/Login/Restituisci/@ViewBag.User.Id/@ul.Libro?.Id" class="btn-primary">
+                         Restituisci
+                     </a>
+                </div>
+            </div>
+        </article>
     }
 </section>

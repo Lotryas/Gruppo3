@@ -105,5 +105,18 @@ namespace Libreria.Controllers
                 return Content("Registrazione fallita");
             }
         }
+
+        [HttpGet("/Login/Restituisci/{idUtente:int}/{idLibro:int}")]
+        public IActionResult Restituisci(long idUtente, long idLibro)
+        {
+            if (DAOUtente_Libro.GetInstance().DeletePrestato(idUtente, idLibro))
+            {
+                return Redirect("/Login/Profilo");
+            }
+            else
+            {
+                return Content("Errore nella cancellazione del prestito");
+            }
+        }
     }
 }

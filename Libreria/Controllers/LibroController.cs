@@ -72,7 +72,6 @@ namespace Libreria.Controllers
         [HttpGet("/Libro/Prestito/{idUtente:int}/{idLibro:int}")]
         public IActionResult Prestito(long idUtente, long idLibro)
         {
-            Console.WriteLine(idUtente + " " + idLibro);
             if (HttpContext.Items["AuthUser"] is not null)
             {
                 
