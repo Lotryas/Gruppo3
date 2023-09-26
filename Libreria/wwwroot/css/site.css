@@ -73,7 +73,7 @@ form label {
 }
 
 .btn-primary {
-  padding: 0.75rem 1.4rem;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
   font-weight: 500;
   border: none;
@@ -90,7 +90,7 @@ form label {
 }
 
 .btn-secondary {
-  padding: 0.75rem 1.4rem;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
   font-weight: 500;
   border: none;

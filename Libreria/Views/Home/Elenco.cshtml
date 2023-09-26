@@ -25,7 +25,7 @@
             <div class="flex-grow flex flex-col gap-2">
                 <div class="flex-grow">
                     <div class="flex items-center justify-between text-gray-600">
-                        <small>ciao.pdf</small>
+                        <small>@(libro.Formato ? libro.NomeFile : "Formato digitale non disponibile")</small>
                         @if (ViewBag.User?.Ruolo == "Amministratore")
                         {
                             <a title="Modifica" href="/Libro/ModificaLibri/@libro.Id" class="btn-link">
