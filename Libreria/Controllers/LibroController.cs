@@ -27,7 +27,7 @@ namespace Libreria.Controllers
             l.Locandina = parametri["locandina"];
 
             if (DAOLibro.GetInstance().Insert(l))
-                return Content("Libro aggiunto al database!");
+                return Redirect("/Home/Elenco");
             else
                 return Content("Errore nell'inserimento");
         }
@@ -36,7 +36,7 @@ namespace Libreria.Controllers
         {
             var libro = (Libro?)DAOLibro.GetInstance().Find(id);
             if (libro is null)
-                return Content($"Libro con ID {id} non trovato");
+                return Redirect("/Home/Elenco");
 
             return View(libro);
         }
@@ -52,10 +52,9 @@ namespace Libreria.Controllers
             l.Formato = bool.Parse(parametri["formato"]);
             l.NomeFile = parametri["nomefile"];
             l.Locandina = parametri["locandina"];
-            Console.WriteLine(l.ToString());
 
             if (DAOLibro.GetInstance().Update(l))
-                return Content("Libro aggiornato con successo!");
+                return Redirect("/Home/Elenco");
             else
                 return Content("Errore nell'aggiornamento");
         }

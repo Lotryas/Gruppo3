@@ -21,6 +21,12 @@ public class HomeController : Controller
 
     public IActionResult Elenco(string search)
     {
+        if (HttpContext.Items["AuthUser"] is not null)
+        {
+            Utente? u = (Utente?)HttpContext.Items["AuthUser"];
+            List<long> prestiti = DAOUtente_Libro.GetInstance().GetPrestati(u.Id);
+            ViewBag.Prestiti = prestiti;
+        }
         if (search != null)
         {
             List<Entity> libri= DAOLibro.GetInstance().FindTitolo(search);

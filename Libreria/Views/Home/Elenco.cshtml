@@ -58,9 +58,17 @@
                         }
                         else
                         {
-                            <a href="/Libro/Prestito/@ViewBag.User.Id/@libro.Id" class="btn-primary">
-                                Prendi in prestito
-                            </a>
+                            if (ViewBag.Prestiti.Contains(libro.Id))
+                            {
+                                <p>Già in possesso</p>
+                            }
+                            else
+                            {
+                                <a href="/Libro/Prestito/@ViewBag.User.Id/@libro.Id" class="btn-primary">
+                                    Prendi in prestito
+                                </a>
+                            }
+                            
                         }
 
                     }

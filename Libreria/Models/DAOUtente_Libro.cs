@@ -112,4 +112,18 @@ public class DAOUtente_Libro : IDAO
         return ris;
 
     }
+
+    public List<long> GetPrestati(long idUtente)
+    {
+        List<long> ris = new();
+        SqlCommand cmd = new("SELECT idLibro FROM Utenti_Libri WHERE idUtente = @id");
+        cmd.Parameters.AddWithValue("@id", idUtente);
+        List<Dictionary<string, object>> tabella = _db.ReadMany(cmd);
+        foreach (Dictionary<string,object> riga in tabella)
+        {
+            ris.Add((long)(int)riga["idlibro"]);
+        }
+        return ris;
+        
+    }
 }

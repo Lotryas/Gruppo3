@@ -21,6 +21,9 @@
         document.getElementById("nomefile").value.length > 255)
         errore.push("Il nome file inserito non è valido");
 
+    if (document.getElementById("locandina").value.length < 1)
+        errore.push("L'url della locandina inserito non è valido")
+
     if (errore.length > 0)
     {
         alert(errore.join("\n"));
