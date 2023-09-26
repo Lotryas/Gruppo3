@@ -74,17 +74,17 @@ namespace Libreria.Controllers
         {
             if (HttpContext.Items["AuthUser"] is not null)
             {
-                
+
                 Utente_Libro ul = new();
                 ul.Utente = DAOUtente.GetInstance().Find(idUtente) as Utente;
                 ul.Libro = DAOLibro.GetInstance().Find(idLibro) as Libro;
                 if (DAOUtente_Libro.GetInstance().Insert(ul))
-                    return Content("Il libro è stato aggiunto tra i tuoi prestiti");
+                    return Redirect("/Home/Elenco");
                 else
                     return Content("Errore nell'aggiunta del prestito");
             }
             else
-                return Content("Errore, non sei loggato");
+                return Redirect("/Login/Index");
         }
     }
 }
