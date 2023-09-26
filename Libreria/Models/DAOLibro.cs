@@ -113,9 +113,8 @@ public class DAOLibro : IDAO
 
     public List<Entity> FindTitolo(string titolo)
     {
-        SqlCommand cmd = new("SELECT * FROM Libri WHERE titolo LIKE '%' + @titolo + '%';");
+        SqlCommand cmd = new("SELECT * FROM Libri WHERE titolo LIKE '%' + @titolo + '%' OR autore LIKE '%' + @titolo + '%' OR genere LIKE '%' + @titolo + '%';");
         cmd.Parameters.AddWithValue("@titolo", titolo);
         return this.ReadManyLibri(cmd);
     }
-
 }

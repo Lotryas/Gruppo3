@@ -25,6 +25,7 @@ CREATE TABLE Libri (
 	locandina text
 );
 
+
 CREATE TABLE Utenti_Libri (
 	id INT PRIMARY KEY IDENTITY(1,1),
 	idUtente INT,
